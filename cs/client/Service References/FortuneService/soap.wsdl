@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://luka.sh/fortune/tools/" xmlns:s="http://www.w3.org/2001/XMLSchema" targetNamespace="http://luka.sh/fortune/tools/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types />
+  <wsdl:message name="getFortuneHtmlSoapIn">
+    <wsdl:part name="path" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getFortuneHtmlSoapOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getFortuneStrSoapIn">
+    <wsdl:part name="path" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getFortuneStrSoapOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="FortuneSrvSoap">
+    <wsdl:operation name="getFortuneHtml">
+      <wsdl:input message="tns:getFortuneHtmlSoapIn" />
+      <wsdl:output message="tns:getFortuneHtmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getFortuneStr">
+      <wsdl:input message="tns:getFortuneStrSoapIn" />
+      <wsdl:output message="tns:getFortuneStrSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FortuneSrvSoap" type="tns:FortuneSrvSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getFortuneHtml">
+      <soap:operation soapAction="http://luka.sh/fortune/tools/getFortuneHtml" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://luka.sh/fortune/tools/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="path" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://luka.sh/fortune/tools/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFortuneStr">
+      <soap:operation soapAction="http://luka.sh/fortune/tools/getFortuneStr" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://luka.sh/fortune/tools/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="path" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://luka.sh/fortune/tools/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FortuneSrv">
+    <wsdl:port name="FortuneSrvSoap" binding="tns:FortuneSrvSoap">
+      <soap:address location="http://luka.sh/fortune/tools/soap.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
